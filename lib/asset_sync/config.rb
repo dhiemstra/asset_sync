@@ -68,7 +68,7 @@ module AssetSync
     end
 
     def manifest_dir
-      if defined? Rails && Rails.application.config.assets.manifest
+      if defined?(Rails) && Rails.application.config.assets.manifest
         Rails.application.config.assets.manifest
       else
         default_manifest_directory
