@@ -208,7 +208,7 @@ module AssetSync
   private
 
     def default_manifest_directory
-      File.join(Rails.public_path, assets_prefix)
+      File.join(public_path, assets_prefix)
     end
   end
 end
