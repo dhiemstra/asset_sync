@@ -69,14 +69,14 @@ module AssetSync
 
     def get_local_files
       if self.config.manifest
-        if ActionView::Base.respond_to?(:assets_manifest)
+        if defined?(ActionView) && ActionView::Base.respond_to?(:assets_manifest)
           log "Using: Rails 4.0 manifest access"
           manifest = Sprockets::Manifest.new(ActionView::Base.assets_manifest.environment, ActionView::Base.assets_manifest.dir)
           return manifest.assets.values.map { |f| File.join(self.config.assets_prefix, f) }
         elsif File.exists?(self.config.manifest_path)
           log "Using: Manifest #{self.config.manifest_path}"
           yml = YAML.load(IO.read(self.config.manifest_path))
-   
+
           return yml.map do |original, compiled|
             # Upload font originals and compiled
             if original =~ /^.+(eot|svg|ttf|woff)$/
